@@ -19,14 +19,15 @@ const thoughtsSchema = new Schema(
     // },
     createdAt: {
       type: Date,
-      default: Date.now,
+      default: Date.now(),
+      get: 
     },
   },
   {
     toJSON: {
       getters: true,
     },
-    id: false,
+    // id: false,
   }
 );
 
