@@ -1,10 +1,11 @@
-const { Course, Student } = require('../models');
+const { Thought, User } = require('../models');
 
 module.exports = {
-  // Get all courses
-  getCourses(req, res) {
-    Course.find()
-      .then((courses) => res.json(courses))
+  // Get all thoughts
+  getThoughts(req, res) {
+    Thought.find()
+      .populate({ path: 'reactions', select: '-__v' })
+      .then((thought) => res.json(thought))
       .catch((err) => res.status(500).json(err));
   },
   // Get a course
