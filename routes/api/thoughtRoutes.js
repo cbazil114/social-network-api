@@ -12,14 +12,17 @@ const {
 // /api/thoughts
 router.route('/')
 .get(getThoughts)
+.post(createThought);
+
 
 // /api/thoughts/:userId
-router.route('/:userId')
-  .post(createThought);
+// router.route('/:userId')
+//   .post(createThought);
+// This was my attempt to get the thoughts to appear in the array for each user.
 
 // /api/thoughts/:id
 router
-  .route('/:id')
+  .route('/:thoughtId')
   .get(getSingleThought)
   .put(updateThought)
   .delete(deleteThought);

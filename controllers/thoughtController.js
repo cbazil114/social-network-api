@@ -21,35 +21,42 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   // Create a thought
-//   createThought(req, res) {
-//     Thought.create(req.body)
-//     .then(({ _id }) => {
-//       return User.findOneAndUpdate(
-//         { _id: body.userId },
-//         { $push: { thoughts: _id } },
-//         { new: true },
-//       );
-//     })
-//     .then((user) =>
-//     !user
-//       ? res.status(404).json({ message: 'No user with this id!' })
-//       : res.json(thought)
-//   )
-//   .catch((err) => res.status(500).json(err));
+  // createThought(req, res) {
+  //   Thought.create(req.body)
+  //   .then(({ _id }) => {
+  //     return User.findOneAndUpdate(
+  //       { _id: body.userId },
+  //       { $push: { thoughts: _id } },
+  //       { new: true },
+  //     );
+  //   })
+  //   .then((user) =>
+  //   !user
+  //     ? res.status(404).json({ message: 'No user with this id!' })
+  //     : res.json({ message: "Thought successfully created"})
+  // )
+  // .catch((err) => res.status(500).json(err));
 // },
 createThought(req, res) {
   Thought.create(req.body)
     .then((thought) => {
      return User.findOneAndUpdate(
-      {_id: req.params.userId},
+      {_id: req.params.id},
       {$push:{thoughts:thought.thoughtId}},
-      {new:true})},
+      {new: true})},
     )
-    .then(result => res.json(result))
-    .catch((err) => {
-      console.log(err);
-      return res.status(500).json(err);
-    });
+//     .then(result => res.json(result))
+//     .catch((err) => {
+//       console.log(err);
+//       return res.status(500).json(err);
+//     });
+// },
+.then((user) =>
+    !user
+      ? res.status(404).json({ message: 'No user with this id!' })
+      : res.json({ message: "Thought successfully created"})
+  )
+  .catch((err) => res.status(500).json(err));
 },
 
   // Delete a thought
@@ -66,6 +73,7 @@ createThought(req, res) {
       .then(() => res.json({ message: 'Thought and users deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
+
   // Update a thought
   updateThought(req, res) {
     Thought.findOneAndUpdate(

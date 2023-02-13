@@ -64,13 +64,13 @@ module.exports = {
   },
   // Delete a user and remove them from the course
   deleteUser(req, res) {
-    User.findOneAndRemove({ _id: req.params.userId })
+    User.findOneAndRemove({ _id: req.params.id })
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No such user exists" })
           : User.findOneAndUpdate(
-              { users: req.params.userId },
-              { $pull: { users: req.params.userId } },
+              { users: req.params.id },
+              { $pull: { users: req.params.id } },
               { new: true }
             )
       )
@@ -107,7 +107,7 @@ module.exports = {
   removeFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $pull: { friends: { friendId: req.params.friendId } } },
+      { $pull: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>
