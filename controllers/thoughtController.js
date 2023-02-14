@@ -10,7 +10,7 @@ module.exports = {
   },
   // Get a thought
   getSingleThought(req, res) {
-    Thought.findOne({ _id: req.params.thoughtId })
+    Thought.findOne({ thoughtId: req.params.thoughtId })
       .populate({ path: "reactions", select: "-__v" })
       .select('-__v')
       .then((thought) =>
