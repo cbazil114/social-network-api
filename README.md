@@ -33,7 +33,7 @@ Once you have done the final step in the Usage section, you can access the appli
 ## Walkthrough
 
 Watch the walkthrough video at the following link: 
-[Screencastify]()
+[Screencastify](https://drive.google.com/file/d/1Ss5zzUH3B-OtWlWvC7QG8TRwoZvgFnwj/view)
 
 ## Questions
 
