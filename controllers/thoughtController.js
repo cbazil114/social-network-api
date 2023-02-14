@@ -41,9 +41,9 @@ createThought(req, res) {
   Thought.create(req.body)
     .then((thought) => {
      return User.findOneAndUpdate(
-      {_id: req.params.userId},
-      {$push:{thoughts: thought.id}},
-      {new: true})},
+      {_id: req.body.userId},
+      {$push:{thoughts: thought._id}},
+      {runValidators: true, new: true})},
     )
 //     .then(result => res.json(result))
 //     .catch((err) => {
@@ -56,7 +56,10 @@ createThought(req, res) {
       ? res.status(404).json({ message: 'No user with this id!' })
       : res.json({ message: "Thought successfully created"})
   )
-  .catch((err) => res.status(500).json(err));
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 },
 
   // Delete a thought
