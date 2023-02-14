@@ -65,15 +65,15 @@ createThought(req, res) {
   // Delete a thought
   deleteThought(req, res) {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
-      // .then((thought) =>
-        // !thought
-        //   ? res.status(404).json({ message: 'No thought with that ID' })
-        //   : 
-      //     User.findOneAndUpdate(
-      //       { _id: req.params.id },
-      //       { $pull: { thoughts: req.params.id }},
-      //       { new:true })
-      // )
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: 'No thought with that ID' })
+          : 
+          User.findOneAndUpdate(
+            { thoughts: params._id },
+            { $pull: { thoughts: params._id }},
+            { new: true })
+      )
       .then(() => res.json({ message: 'Thought and users deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
