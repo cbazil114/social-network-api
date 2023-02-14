@@ -69,9 +69,10 @@ createThought(req, res) {
         !thought
           ? res.status(404).json({ message: 'No thought with that ID' })
           : 
+          // Updates user by pulling the deleted thought
           User.findOneAndUpdate(
-            { thoughts: params._id },
-            { $pull: { thoughts: params._id }},
+            { thoughts: req.params.thoughtId },
+            { $pull: { thoughts: req.params.thoughtId }},
             { new: true })
       )
       .then(() => res.json({ message: 'Thought and users deleted!' }))
